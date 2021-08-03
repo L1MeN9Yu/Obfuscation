@@ -4,11 +4,9 @@
 
 import Foundation
 
-public class Obfuscator {
+public struct Obfuscator {
     /// The salt used to obfuscate and reveal the string.
     private let salt: String
-
-    public init() { self.salt = Self.defaultSalt }
 
     public init(salt: String) { self.salt = salt }
 }
@@ -53,26 +51,5 @@ public extension Obfuscator {
         }
 
         return String(bytes: decrypted, encoding: .utf8)!
-    }
-}
-
-
-private extension Obfuscator {
-    static var defaultSaltTypes: [Any.Type] = [String.self, Data.self]
-    static var defaultSalt = update()
-}
-
-public extension Obfuscator {
-    static func register(defaultSalt types: [Any.Type]) {
-        defaultSaltTypes = types
-        defaultSalt = update()
-    }
-
-    static func update() -> String {
-        var string = String()
-        string = defaultSaltTypes.reduce(into: string) { (result: inout String, anyType: Any.Type) in
-            result.append(contentsOf: String(describing: anyType))
-        }
-        return string
     }
 }
