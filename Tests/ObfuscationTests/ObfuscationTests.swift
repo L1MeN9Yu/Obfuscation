@@ -1,7 +1,5 @@
 import XCTest
 @testable import Obfuscation
-import ObjectiveC
-import Darwin
 
 final class ObfuscationTests: XCTestCase {
     func testObfuscator() {
