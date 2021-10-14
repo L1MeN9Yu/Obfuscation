@@ -8,7 +8,9 @@ final class ObfuscationTests: XCTestCase {
         let string = String(value)
         let obfuscator = Obfuscator(salt: salt)
         let array = obfuscator.bytes(of: string)
-        let result = obfuscator.string(of: array)
+        guard let result = obfuscator.string(of: array) else {
+            return XCTFail()
+        }
         XCTAssertEqual(result, string)
     }
 }
