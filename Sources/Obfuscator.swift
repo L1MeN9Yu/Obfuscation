@@ -40,7 +40,7 @@ public extension Obfuscator {
      - parameter key: the byte array to reveal
      - returns: the original string
      */
-    func string(of bytes: [UInt8]) -> String {
+    func string(of bytes: [UInt8]) -> String? {
         let cipher = [UInt8](salt.utf8)
         let length = cipher.count
 
@@ -50,6 +50,6 @@ public extension Obfuscator {
             decrypted.append(element ^ cipher[offset % length])
         }
 
-        return String(bytes: decrypted, encoding: .utf8)!
+        return String(bytes: decrypted, encoding: .utf8)
     }
 }
