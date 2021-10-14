@@ -13,12 +13,12 @@ public struct Obfuscator {
 
 public extension Obfuscator {
     /**
-     This method obfuscates the string passed in using the salt
-     that was used when the Obfuscator was initialized.
+      This method obfuscates the string passed in using the salt
+      that was used when the Obfuscator was initialized.
 
-     - parameter string: the string to obfuscate
-     - returns: the obfuscated string in a byte array
-    */
+      - parameter string: the string to obfuscate
+      - returns: the obfuscated string in a byte array
+     */
     func bytes(of string: String) -> [UInt8] {
         let text = [UInt8](string.utf8)
         let cipher = [UInt8](salt.utf8)

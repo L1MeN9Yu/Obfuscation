@@ -4,12 +4,12 @@
 import PackageDescription
 
 let package = Package(
-        name: "Obfuscation",
-        products: [
-            .library(name: "Obfuscation", targets: ["Obfuscation"]),
-        ],
-        targets: [
-            .target(name: "Obfuscation", dependencies: [], path: "Sources"),
-            .testTarget(name: "ObfuscationTests", dependencies: ["Obfuscation"]),
-        ]
+    name: "Obfuscation",
+    products: [
+        .library(name: "Obfuscation", targets: ["Obfuscation"]),
+    ],
+    targets: [
+        .target(name: "Obfuscation", path: "Sources"),
+        .testTarget(name: "ObfuscationTests", dependencies: ["Obfuscation"], path: "Tests"),
+    ]
 )

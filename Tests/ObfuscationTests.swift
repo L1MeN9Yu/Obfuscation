@@ -1,5 +1,5 @@
-import XCTest
 @testable import Obfuscation
+import XCTest
 
 final class ObfuscationTests: XCTestCase {
     func testObfuscator() {
@@ -11,8 +11,4 @@ final class ObfuscationTests: XCTestCase {
         let result = obfuscator.string(of: array)
         XCTAssertEqual(result, string)
     }
-
-    static var allTests = [
-        ("testObfuscator", testObfuscator),
-    ]
 }
