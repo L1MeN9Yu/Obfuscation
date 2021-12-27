@@ -6,9 +6,19 @@ import Foundation
 
 public struct Obfuscator {
     /// The salt used to obfuscate and reveal the string.
-    private let salt: String
+    private let salt: [UInt8]
 
-    public init(salt: String) { self.salt = salt }
+    public init(salt: [UInt8]) { self.salt = salt }
+
+    public init(salt: String) { self.salt = [UInt8](salt.utf8) }
+}
+
+public extension Obfuscator {
+    func operate(of input: [UInt8]) -> [UInt8] {
+        input.enumerated().reduce(into: [UInt8]()) { (result: inout [UInt8], tuple: (offset: Int, element: UInt8)) in
+            result.append(tuple.element ^ salt[tuple.offset % salt.count])
+        }
+    }
 }
 
 public extension Obfuscator {
@@ -20,16 +30,7 @@ public extension Obfuscator {
       - returns: the obfuscated string in a byte array
      */
     func bytes(of string: String) -> [UInt8] {
-        let text = [UInt8](string.utf8)
-        let cipher = [UInt8](salt.utf8)
-        let length = cipher.count
-
-        var encrypted = [UInt8]()
-
-        text.enumerated().forEach { (offset: Int, element: UInt8) in
-            encrypted.append(element ^ cipher[offset % length])
-        }
-        return encrypted
+        operate(of: [UInt8](string.utf8))
     }
 
     /**
@@ -40,16 +41,7 @@ public extension Obfuscator {
      - parameter key: the byte array to reveal
      - returns: the original string
      */
-    func string(of bytes: [UInt8]) -> String? {
-        let cipher = [UInt8](salt.utf8)
-        let length = cipher.count
-
-        var decrypted = [UInt8]()
-
-        bytes.enumerated().forEach { (offset: Int, element: UInt8) in
-            decrypted.append(element ^ cipher[offset % length])
-        }
-
-        return String(bytes: decrypted, encoding: .utf8)
+    func string(of bytes: [UInt8], encoding: String.Encoding = .utf8) -> String? {
+        String(bytes: operate(of: bytes), encoding: encoding)
     }
 }

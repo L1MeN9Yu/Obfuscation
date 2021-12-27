@@ -82,3 +82,6 @@ fastlane/test_output
 
 # Brew
 Brewfile.lock.json
+
+# Swift Package
+.swiftpm
