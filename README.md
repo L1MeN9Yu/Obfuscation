@@ -14,7 +14,10 @@ import Obfuscation
 
 let salt = String(describing: Int.self)
 let obfuscator = Obfuscator(salt: salt)
-let bytes = obfuscator.bytes(of: "your literal string")
+let string = "your literal string"
+// or avoid using literal string
+let string = "".y.o.u.r.space.l.i.t.e.r.a.l.space.s.t.r.i.n.g
+let bytes = obfuscator.bytes(of: string)
 let runtimeString = obfuscator.string(of: bytes)
 ```
 
