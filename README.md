@@ -28,7 +28,7 @@ let runtimeString = obfuscator.string(of: bytes)
 To use the `Obfuscation` library in a SwiftPM project, add the following line to the dependencies in your Package.swift file:
 
 ```swift
-.package(url: "https://github.com/L1MeN9Yu/Obfuscation.git", from: "1.0.0")
+.package(url: "https://github.com/L1MeN9Yu/Obfuscation.git", from: "1.4.0")
 ```
 
 Finally, include "Obfuscation" as a dependency for your executable target:
